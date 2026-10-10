@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Calculadora de consola que recibe dos numeros enteros y calcula
- * suma, resta, multiplicacion y division.
+ * suma, resta, multiplicacion, division y potencia.
  *
  * Desarrollador: Juan Camilo Lopez
  */
@@ -12,6 +12,8 @@ public class OperacionesAritmeticas {
             "Division: operacion no valida, el divisor no puede ser cero.";
     public static final String MSG_DESBORDAMIENTO =
             "operacion no valida, el resultado supera el rango de un entero.";
+    public static final String MSG_EXPONENTE_NEGATIVO =
+            "Potencia: operacion no valida, el exponente no puede ser negativo.";
 
     /** Suma dos enteros. Lanza ArithmeticException si el resultado se desborda. */
     public static int sumar(int a, int b) {
@@ -40,6 +42,25 @@ public class OperacionesAritmeticas {
             throw new ArithmeticException("Division: " + MSG_DESBORDAMIENTO);
         }
         return a / b;
+    }
+
+    /**
+     * Calcula a elevado a la b con un ciclo for (solicitud de cambio CR-001).
+     * Lanza ArithmeticException si b es negativo o si el resultado se desborda.
+     */
+    public static long potencia(int a, int b) {
+        if (b < 0) {
+            throw new ArithmeticException(MSG_EXPONENTE_NEGATIVO);
+        }
+        long resultado = 1;
+        for (int i = 0; i < b; i++) {
+            try {
+                resultado = Math.multiplyExact(resultado, (long) a);
+            } catch (ArithmeticException e) {
+                throw new ArithmeticException("Potencia: " + MSG_DESBORDAMIENTO);
+            }
+        }
+        return resultado;
     }
 
     /**
@@ -84,6 +105,11 @@ public class OperacionesAritmeticas {
         }
         try {
             System.out.println(a + " / " + b + " = " + dividir(a, b));
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(a + " ^ " + b + " = " + potencia(a, b));
         } catch (ArithmeticException e) {
             System.out.println(e.getMessage());
         }
