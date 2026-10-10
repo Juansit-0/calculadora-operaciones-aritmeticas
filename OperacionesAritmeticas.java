@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Calculadora de consola que recibe dos numeros enteros y calcula
  * suma, resta, multiplicacion y division.
  *
- * Autor: Juan Camilo Lopez
+ * Desarrollador: Juan Camilo Lopez
  */
 public class OperacionesAritmeticas {
 
